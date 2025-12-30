@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FocusFlow | Task Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__text">
+      <p class="eyebrow">Productivity</p>
+      <h1>Plan your day with clarity</h1>
+      <p class="lead">
+        Capture tasks, set priorities, and keep momentum with a focused workspace.
+        Everything syncs locally so your plan is always available.
+      </p>
+      <div class="cta-row">
+        <button class="btn btn--primary" id="add-sample">Load sample tasks</button>
+        <button class="btn btn--ghost" id="clear-all">Clear all</button>
+      </div>
+    </div>
+    <div class="hero__card">
+      <div class="stats">
+        <div class="stat">
+          <p class="stat__label">Tasks</p>
+          <p class="stat__value" id="stat-total">0</p>
+        </div>
+        <div class="stat">
+          <p class="stat__label">Completed</p>
+          <p class="stat__value" id="stat-complete">0</p>
+        </div>
+        <div class="stat">
+          <p class="stat__label">Focus</p>
+          <p class="stat__value" id="stat-focus">0%</p>
+        </div>
+      </div>
+      <form id="task-form" class="card">
+        <div class="form-row">
+          <label for="title">Task</label>
+          <input id="title" name="title" placeholder="What needs to get done?" required />
+        </div>
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="priority">Priority</label>
+            <select id="priority" name="priority">
+              <option value="high">High</option>
+              <option value="medium" selected>Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="due">Due</label>
+            <input type="date" id="due" name="due" />
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="notes">Notes</label>
+          <textarea id="notes" name="notes" rows="2" placeholder="Add a little more context"></textarea>
+        </div>
+        <button class="btn btn--primary" type="submit">Add task</button>
+      </form>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="filters card">
+      <div class="filters__group">
+        <label for="filter-status">Status</label>
+        <select id="filter-status">
+          <option value="all" selected>All</option>
+          <option value="open">Open</option>
+          <option value="done">Done</option>
+        </select>
+      </div>
+      <div class="filters__group">
+        <label for="filter-priority">Priority</label>
+        <select id="filter-priority">
+          <option value="all" selected>All</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+      </div>
+      <div class="filters__group">
+        <label for="filter-search">Search</label>
+        <input id="filter-search" placeholder="Search tasks" />
+      </div>
+      <button class="btn btn--ghost" id="reset-filters">Reset filters</button>
+    </section>
+
+    <section class="task-list card" aria-live="polite">
+      <div class="task-list__header">
+        <div>
+          <p class="eyebrow">Tasks</p>
+          <h2>Today's flow</h2>
+        </div>
+        <p class="muted" id="empty-copy">Add your first task to get rolling.</p>
+      </div>
+      <ul id="task-items" class="tasks"></ul>
+    </section>
+  </main>
+
+  <template id="task-template">
+    <li class="task">
+      <div class="task__main">
+        <div class="task__title-row">
+          <input class="task__checkbox" type="checkbox" />
+          <div class="task__title-group">
+            <p class="task__title"></p>
+            <p class="task__meta"></p>
+          </div>
+          <span class="badge"></span>
+        </div>
+        <p class="task__notes"></p>
+      </div>
+      <button class="btn btn--ghost task__delete">Delete</button>
+    </li>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
